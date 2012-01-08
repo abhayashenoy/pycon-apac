@@ -1,0 +1,59 @@
+application: web2py
+version: 1
+api_version: 1
+runtime: python
+
+derived_file_type:
+- python_precompiled
+
+handlers:
+
+- url: /_ah/stats.*
+  script: $PYTHON_LIB/google/appengine/ext/appstats/ui.py
+  login: admin
+ 
+- url: /(?P<a>.+?)/static/(?P<b>.+)
+  static_files: applications/\1/static/\2
+  upload: applications/(.+?)/static/(.+)
+  secure: optional
+  expiration: "90d"
+
+- url: /_ah/admin/.*
+  script: $PYTHON_LIB/google/appengine/ext/admin
+  login: admin
+ 
+- url: /_ah/queue/default
+  script: gaehandler.py
+  login: admin
+
+- url: .*
+  script: gaehandler.py  
+  secure: optional
+
+admin_console:
+  pages:
+  - name: Appstats
+    url: /_ah/stats
+   
+skip_files: |
+ ^(.*/)?(
+ (app\.yaml)|
+ (app\.yml)|
+ (index\.yaml)|
+ (index\.yml)|
+ (#.*#)|
+ (.*~)|
+ (.*\.py[co])|
+ (.*/RCS/.*)|
+ (\..*)|
+ (applications/(admin|examples)/.*)|	
+ ((admin|examples|welcome)\.tar)|
+ (applications/.*?/databases/.*) |
+ (applications/.*?/errors/.*)|
+ (applications/.*?/cache/.*)|
+ (applications/.*?/sessions/.*)|
+ )$
+
+builtins:
+- remote_api: on
+- datastore_admin: on

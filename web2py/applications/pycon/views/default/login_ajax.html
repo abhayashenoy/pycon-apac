@@ -1,0 +1,39 @@
+<script type="text/javascript">
+$(function () {
+  var cache = {};
+
+  var input_changed = function () {
+    var t = $(this);
+    switch (t.data('name')) {
+    case 'first_name':
+    case 'last_name':
+        if (cache['nick'].data('changed') === false) {
+          cache['nick'].val(cache['first_name'].val() + ' ' + cache['last_name'].val());
+        }
+        break;
+    case 'co':
+        if (cache['badge_1'].data('changed') === false) {
+          cache['badge_1'].val(t.val());
+        }
+        break;
+    case 'web_page':
+        if (cache['badge_2'].data('changed') === false) {
+          cache['badge_2'].val(t.val());
+        }
+        break;
+    case 'nick':
+    case 'badge_1':
+    case 'badge_2':
+        t.data('changed', true);
+        break;
+    }
+  }
+  
+  $.each(['nick', 'badge_1', 'badge_2', 'first_name', 'last_name', 'co', 'web_page'], function(idx, val) {
+    cache[val] = $("input[name=" + val + "]");
+    cache[val].data('changed', false);
+    cache[val].data('name', val);
+    cache[val].change(input_changed);
+  });
+});
+</script>

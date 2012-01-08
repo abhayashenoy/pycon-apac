@@ -1,0 +1,99 @@
+{{extend 'layout.html'}}
+
+<h2>Invoice</h2>
+
+<div class="left">
+  <p>Python User Group (Singapore)</p>
+  <p>37 Sunshine Terrace</p>
+  <p>Bartley Rise</p>
+  <p>Singapore 535712</p>
+  <p>ROS ref: T09SS0122B</p>
+  <p>Email: <a href="mailto:conference@pugs.org.sg">conference@pugs.org.sg</a></p>
+</div>
+<img class="right" src="{{=URL(r=request, c='static/images', f='pugs.jpg')}}"" width="200px" style="margin-top: -30px"/>
+<div class="clear"></div>
+
+<table class="no-deco">
+  <tr>
+    <td>Date</td>
+    <td>{{=user.payment_datetime.strftime("%d/%m/%y")}}</td>
+  </tr>    
+  <tr>
+    <td>Invoice Number</td>
+    <td>{{=user.payment_invoice}}</td>
+  </tr>    
+  <tr>
+    <td>To</td>
+    <td>{{=user.first_name}} {{=user.last_name}}<br>{{=user.co}}<br>{{=user.street}}<br>{{=user.city}}<br>{{=user.country}}</td>
+  </tr>
+</table>
+<table>
+  {{for u in balances:}}
+    <tr>
+      <td>{{=u.name}}</td>
+      <td>${{=u.conf}}</td>
+    </tr>
+    {{for t in u.tuts:}}
+      <tr>
+        <td>{{=t}}</td>
+        <td>${{=settings.tutorial_rate}}</td>
+      </tr>
+    {{pass}}
+    {{if u.disc:}}
+      <tr>
+        <td>Discount</td>
+        <td>-${{=u.disc}}</td>
+      </tr>
+    {{pass}}
+  {{pass}}
+  <tr>
+    <td><b>Total</b></td>
+    <td>${{=balance}}</td>
+  </tr>
+</table>
+
+<table class="no-deco">
+  <tr>
+    <td>Due</td>
+    <td>{{=request.now.strftime("%d/%m/%y")}}</td>
+  </tr>
+  <tr>
+    <td colspan="2"><b>Payment by bank transfer or paypal</b></td>
+  </tr>
+  <tr>
+    <td>Account Name</td>
+    <td>Python User Group (Singapore)</td>
+  </tr>
+  <tr>
+    <td>Account Number</td>
+    <td>22-0-001965-8</td>
+  </tr>
+  <tr>
+    <td>Currency</td>
+    <td>SGD</td>
+  </tr>
+  <tr>
+    <td>Name of Bank</td>
+    <td>Standard Chartered</td>
+  </tr>
+  <tr>
+    <td>Bank Number</td>
+    <td>7144</td>
+  </tr>
+  <tr>
+    <td>Branch Number</td>
+    <td>022</td>
+  </tr>
+  <tr>
+    <td>Branch Address</td>
+    <td>Woodlands Branch<br>900 South Woodlands Drive<br>#02-07 Woodlands Civic Centre<br>Singapore 730900</td> 
+  </tr>
+  <tr>
+    <td>SWIFT Code</td>
+    <td>SCBLSGSG</td>
+  </tr>
+  <tr>
+    <td>Paypal account</td>
+    <td>paypal@pugs.org.sg</td>
+  </tr>
+</table>

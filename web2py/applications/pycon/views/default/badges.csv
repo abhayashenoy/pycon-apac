@@ -1,0 +1,4 @@
+{{
+response.headers['Content-Type']='application/vnd.ms-excel'
+response.write('\n'.join([','.join((u.nick or '', u.badge_1 or '', u.badge_2 or '')) for u in users]), escape=False)
+}}

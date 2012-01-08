@@ -1,0 +1,22 @@
+{{extend 'layout.html'}}
+
+{{if request.args:}}
+
+<h2>Edit coupon</h2>
+{{=form}}
+<h2>Send this coupon via email</h2>
+{{=form_email}}
+
+{{else:}}
+
+<h2>Create coupons</h2>
+{{=form_multi}}
+
+{{pass}}
+
+<h2>All coupons</h2>
+
+<iframe src="{{=URL(request.application, c='default', f='coupons')}}" width="100%" height="400px">
+</iframe>
+
+</ul>

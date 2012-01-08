@@ -1,0 +1,22 @@
+{{extend 'layout.html'}}
+
+<table class="no-deco">
+  <tr>
+    <td></td>
+    <td></td>
+    <td>First name</td>
+    <td>Last name</td>
+    <td>Email</td>
+    <td>Cheque</td>
+  </tr>
+  {{for u in users:}}
+    <tr>
+      <td><a href="{{=URL(a='pycon', c='default', f='manage_users', args=[u.id])}}">{{=u.id}}</a></td>
+      <td><a href="http://localhost:8080/appadmin/update/db/auth_user/{{=u.id}}">{{=u.id}}</a></td>
+      <td>{{=u.first_name}}</td>
+      <td>{{=u.last_name}}</td>
+      <td>{{=u.email}}</td>
+      <td>{{=u.cheque}}</td>
+    </tr>
+  {{pass}}
+</table>

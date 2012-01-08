@@ -1,0 +1,81 @@
+{{extend 'layout.html'}}
+{{rec=dict(settings.permissions)}}
+  <h2>{{=paper.title}}</h2>
+  
+  <dl>
+    <dt>Decsription</dt>
+    <dd>{{=paper.abstract}}</dd>
+    <dt>Presenters</dt>
+    <dd>{{=paper.authors}}</dd>
+    <dt>Tags</dt>
+    <dd>{{=paper.tags}}</dd>
+    <dt>Recorded talk</dt>
+    <dd>{{=rec[paper.recording]}}</dd>
+  </dl>
+  
+  {{if paper.file or author or manager:}}
+  <section>
+    {{if paper.file:}}
+    <a class="right" href="{{=URL(r=request,f='download',args=paper.file)}}">[last submitted file]</a>
+    {{pass}}
+    {{if author or manager:}}
+    <a href="" onclick="jQuery('#edit_paper').slideToggle();return false">[edit title/abstract]</a>
+  <div id="edit_paper" {{if not edit_form.errors:}}class="hidden"{{pass}}>{{=edit_form}}</div>
+  {{pass}}
+</section>
+{{pass}}
+
+<section>
+  <h3>Discussion</h3>
+
+  {{if messages:}}
+  <div style="overflow: auto; margin-top: 10px;">
+    {{AUTHOR_MESSAGE_CODES=[x for x,y in AUTHOR_MESSAGE_TYPE]}}
+    {{REVIEWER_MESSAGE_CODES=[x for x,y in REVIEWER_MESSAGE_TYPE]}}
+    {{for m in messages:}}
+      {{if not (author and PRIVACY_POLICY(m.message_type)):}}
+      {{
+      if m.message_type in AUTHOR_MESSAGE_CODES:
+          source='author'
+      elif m.message_type in REVIEWER_MESSAGE_CODES:
+          source='reviewer'
+      else:
+          source='editor'
+      pass
+      }}
+      <div class="source source_{{=source}}">
+        <div class="inner">
+          <span class="message_header">
+            {{=MESSAGE_TYPES.get(m.message_type,'Private Communication to reviewer')}}
+            from {{=source.capitalize()}}, {{=prettydate(m.created_on)}}
+            {{if m.file:}}[<a href="{{=URL(r=request,f='download',args=m.file)}}">submitted file</a>]{{pass}}
+          </span>
+          {{if m.body:}}
+          [<a href="" onclick="jQuery('#m{{=m.id}}').slideToggle();return false">read</a>]
+          <p class="message tohide" id="m{{=m.id}}">{{=m.body}}</p>
+          {{pass}}
+        </div>
+      </div>
+      <div class="clear"></div>
+      {{pass}}
+    {{pass}}
+  </div>
+  {{pass}}
+  <h4>Create a new message</h4>
+  {{=form}}
+</section>
+
+{{if add_reviewer_form:}}
+<section>
+  <h3>Reviewers</h3>
+  <dl>
+    {{for r in reviewers:}}
+      <dt>{{=r.first_name}} {{=r.last_name}}</dt>
+      <dd><a href="mailto:{{=r.email}}">[email]</a></dd>
+    {{pass}}
+  </dl>
+  <h4>Add a reviewer</h4>
+  {{=add_reviewer_form}}
+</section>
+{{pass}}
+

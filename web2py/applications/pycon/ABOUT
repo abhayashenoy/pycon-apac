@@ -1,0 +1,51 @@
+Conf2py is an Open Source Conference Management Software written in Python
+
+VERSION 0.9
+
+License is GPL2
+Developed by Massimo Di Pierro
+Support provided by MetaCryption LLC
+
+A slideshow presentation:
+
+  http://www.slideshare.net/mdipierro/conf2py
+
+Download as a web2py app (includes source): 
+
+  http://conf2py.googlecode.com/files/web2py.app.conf2py.w2p
+
+Source only from google code:
+
+  hg clone https://conf2py.googlecode.com/hg/ conf2py  
+
+BACKGROUND
+==========
+
+This software is a complete rewrite of the web2conf software developed for PyCon US 2009 and used for registration at PyCon 2009, PyCon 2010 and Flisol 2010. The reason for the rewrite include source code simplification, added features, shift focus to more traditional academic conferences.
+
+Conf2py is in production since August 2010 for the 6th High End Visualization Workshop in Austria: 
+
+	http://vizworkshop.cct.lsu.edu/viz2010/
+
+FEATURES
+========
+
+- Single Sign-On using Open ID (Google) or OAuth (Facebook, MySpace, etc.) via Janrain.com, or Local registration/login process.
+- Conference Fee Payment with Credit Card via Authorize.Net (no need for secondary login)
+- Default registration fields include: first name, last name, email, web page, address, company, profile text, image, type of registration, optional tutorial registration (multiple tutorials supported), food preferences, arrival date and departure date, accompanying family members (for optional hotel pre-registration). The list of fields is easily extensible.
+- Configurable billing policy based on time dependent conferences rate for different roles and variable number of tutorials/sessions.
+- Configurable coupon discounts and coupon cancellation
+- Users can register other users and pay for them.
+
+- First page displays a slideshow
+- Arbitrary number of wiki pages using the markmin syntax
+- Wiki pages allow embedding of widgets such as "comments" or "videos" or "tagging" or "latex".
+- Automatic computation of geographical latitude and longitude and display of attendees on map.
+
+- Paper submission and review management with roles: author, editor, review. Author submits an abstract (talk or paper proposal). The editor may ask for a paper submission and assign a review of the paper or abstract to one ore more reviewers. The communication between editor and reviewer is invisible to the author. The identity of the reviewer is invisible to the author. The editor, based on reviewer recommendation can accept/reject a paper. Accepted papers are automatically published (a paper can be in any format and can include slides).
+- Paper publishing with bibtex support
+- Management interface with roles: manager, editor, reviewer, author (same person can have multiple roles depending on the paper).
+
+We hope it will be useful. Let us know how we can improve it even more.
+
+Massimo

@@ -1,0 +1,88 @@
+{{extend 'layout.html'}}
+
+{{rows=attendees}}
+
+<h2>Participants</h2>
+
+<div id="map_container">
+  <div id="map"></div>
+</div>
+
+<script src="http://maps.google.com/maps?file=api&amp;v=2&amp;key={{=settings.googlemap_key[request.env.http_host.split(':')[0]]}}" type="text/javascript"></script>
+<script type="text/javascript">
+jQuery(function () {  
+  if (GBrowserIsCompatible()) {
+    var map = new GMap2(document.getElementById("map"));
+    map.addControl(new GSmallMapControl());
+    map.addControl(new GMapTypeControl());
+    map.setCenter(new GLatLng(0,0), 1);
+    // Create a base icon for all of our markers that specifies the
+    // shadow, icon dimensions, etc.
+    var blueIcon = new GIcon();
+    blueIcon.image = "http://www.google.com/intl/en_us/mapfiles/ms/micons/blue-dot.png";
+    blueIcon.shadow = "http://www.google.com/mapfiles/shadow50.png";
+    blueIcon.iconSize = new GSize(37, 34);
+    blueIcon.shadowSize = new GSize(37, 34);
+    blueIcon.iconAnchor = new GPoint(9, 34);
+    blueIcon.infoWindowAnchor = new GPoint(9, 2);
+    blueIcon.infoShadowAnchor = new GPoint(18, 14);
+    function createMarker(point, i, message) {
+       // Set up our GMarkerOptions object
+       if(i==0) markerOptions = { icon:blueIcon };
+       else markerOptions= {}
+       var marker = new GMarker(point, markerOptions);
+       GEvent.addListener(marker, "click", function() {
+         marker.openInfoWindowHtml(message);
+       });
+       return marker;
+    }
+    {{for row in rows:}}{{if row.latitude and row.longitude:}}
+      var point = new GLatLng({{=row.latitude}},{{=row.longitude}});
+      map.addOverlay(createMarker(point, 0, "{{=(row.first_name+' '+row.last_name+', '+row.co+', '+row.country).replace('"',"'")}}"));
+    {{pass}}{{pass}}        
+ }
+});
+
+function open_profile(id,image) {
+  jQuery('#profile'+id+' img').attr('src','{{=URL(r=request,f='download')}}/'+image);
+  jQuery('#profile'+id).toggle();
+  return false;
+}
+</script>
+
+{{if not attendees:}}
+<p>There aren't any public profiles</p>
+{{else:}}
+  {{for a in attendees:}}
+  <table class="participants" id='a{{=a.id}}'>
+    <tr>
+      <td class="width0 name">{{="%(first_name)s %(last_name)s" % a}}</td>
+      <td class="width0">{{="%(co)s" % a or '-'}}</td>
+      <td class="width0">{{="%(country)s" % a or '-'}}</td>
+      <td class="width0">
+        {{if a.web_page:}}
+        [<a href="{{=a.web_page}}">web</a>]
+        {{else:}}
+        -
+        {{pass}}
+      </td>
+      <td class="width0">
+        {{if a.profile_picture or a.short_profile:}}
+        [<a href="#" onclick="return open_profile({{=a.id}},'{{=a.profile_picture}}')">toggle profile</a>]
+        {{else:}}
+        -
+        {{pass}}
+      </td>
+    </tr>
+    <tr class="profile" id="profile{{=a.id}}">
+      <td class="width0">
+        {{if a.profile_picture:}}
+          <img src="" class="profile_pic" />
+        {{pass}}
+      </td>
+      <td colspan="4">{{=a.short_profile}}</td>
+    </tr>
+    <script>jQuery('#profile{{=a.id}}').hide();</script>
+  </table>
+  {{pass}}
+{{pass}}

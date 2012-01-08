@@ -1,0 +1,114 @@
+{{if settings.live_site and request.application == 'pycon':}}
+<section id="addthis_buttons">
+<!-- AddThis Button BEGIN -->
+<div class="addthis_toolbox addthis_default_style ">
+<a class="addthis_button_preferred_1"></a>
+<a class="addthis_button_preferred_2"></a>
+<a class="addthis_button_preferred_3"></a>
+<a class="addthis_button_preferred_4"></a>
+<a class="addthis_button_compact"></a>
+{{if 0:}}
+<a class="addthis_counter addthis_bubble_style"></a>
+{{pass}}
+</div>
+<script type="text/javascript">var addthis_config = {"data_track_clickback":true};</script>
+<script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid=ra-4daadc0d3564b5ac"></script>
+<!-- AddThis Button END -->
+</section>
+{{pass}}
+
+<section class="block">
+  <center><a class="button" href="{{=URL(a='pycon',c='default',f='feedback')}}" style="width:100px">Feedback</a></center>
+  {{if not auth.user:}}
+  {{if 0:}}
+  <center><a class="button" href="{{=URL(a='pycon',c='default',f='user/register')}}" style="width:100px">Registration</a></center>
+  {{pass}}
+  {{else:}}
+      {{if not auth.user.paid:}}
+        <center><a class="button" href="{{=URL(a='pycon',c='default',f='checkout')}}" style="width:100px">Checkout</a></center>
+      {{pass}}
+  {{pass}}  
+  <ul>
+  {{if auth.user:}}
+    <li>Welcome, {{=A(auth.user.first_name,_href=URL('user/profile'))}}
+    {{if manager:}}[M]{{pass}}{{if editor:}}[E]{{pass}}{{if plugin_wiki_editor:}}[W]{{pass}}
+    </li>
+    <li>{{=A('Logout',_href=URL(a='pycon', c='default', f='user/logout'))}}</li>
+    <li>{{=A('Edit profile',_href=URL(a='pycon', c='default', f='user/profile'))}}</li>
+
+    {{if not settings.rpx_domain:}}
+    <li>{{=A('Change password',_href=URL(a='pycon', c='default', f='user/change_password'))}}</li>
+    {{pass}}
+
+    <li>{{=A('Register other users',_href=URL(a='pycon', c='default', f='register_other'))}}</li>
+
+    {{if not auth.user.paid:}}
+    <li>{{=A('Checkout', _href=URL(a='pycon', c='default', f='checkout'))}}</li>
+    <li>{{=A('Invoice', _href=URL(a='pycon', c='default', f='invoice'))}}</li>
+    {{else:}}
+    <li>{{=A('Receipt', _href=URL(a='pycon', c='default', f='receipt'))}}</li>
+    {{pass}}
+  {{else:}}
+    <li>{{=A('Login',_href=URL(a='pycon', c='default', f='user/login'))}}</li>
+    <li>{{=A('Lost password?',_href=URL(a='pycon', c='default', f='user/request_reset_password'))}}</li>      
+  {{pass}}
+  </ul>
+</section>
+
+{{if settings.live_site and request.controller == 'default' and request.function == 'index':}}
+<section class="block" id="twitter">
+<script src="http://widgets.twimg.com/j/2/widget.js"></script>
+<script>
+new TWTR.Widget({
+  version: 2,
+  type: 'search',
+  search: 'pycon',
+  interval: 6000,
+  title: 'PyCon Apac',
+  subject: 'PyCon on Twitter',
+  width: 210,
+  height: 480,
+  theme: {
+    shell: {
+      background: '#366c9c',
+      color: '#ffffff'
+    },
+    tweets: {
+      background: '#ffffff',
+      color: '#8589af',
+      links: '#1985b5'
+    }
+  },
+  features: {
+    scrollbar: false,
+    loop: true,
+    live: true,
+    hashtags: true,
+    timestamp: true,
+    avatars: true,
+    toptweets: true,
+    behavior: 'default'
+  }
+}).render().start();
+</script>
+</section>
+{{pass}}
+
+{{if auth.user and auth.user.manager:}}
+<section class="block">
+  <h4>Admin</h4>
+  <ul>
+    <li>{{=A('Users',_href=URL(a='pycon', c='default', f='manage_users'))}}</li>
+    <li>{{=A('Reports',_href=URL(a='pycon', c='default', f='reports'))}}</li>
+    <li>{{=A('Badges',_href=URL(a='pycon', c='default', f='badges.csv'))}}</li>
+    <li>{{=A('Coupons',_href=URL(a='pycon', c='default', f='manage_coupons'))}}</li>
+    <li>{{=A('Talks',_href=URL(a='pycon', c='default', f='manage_talks'))}}</li>
+    <li>{{=A('Incomplete registrations',_href=URL(a='pycon', c='default', f='not_paid'))}}</li>
+    <li>{{=A('Cheque payments',_href=URL(a='pycon', c='default', f='cheque_payment'))}}</li>
+    <li>{{=A('Bulk update',_href=URL(a='pycon', c='default', f='user_update'))}}</li>
+    <li>{{=A('Import',_href=URL(a='pycon', c='default', f='import_csv'))}}</li>
+  </ul>
+</section>
+{{pass}}
+
+{{=plugin_wiki.embed('sidebar')}}

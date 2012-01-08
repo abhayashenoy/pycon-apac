@@ -1,0 +1,22 @@
+{{extend 'layout.html'}}
+
+{{if request.args:}}
+<h2>Edit user</h2>
+{{else:}}
+<h2>Register others</h2>
+{{pass}}
+
+{{=form}}
+{{include 'default/login_ajax.html'}}
+
+<h2>Users Registered by you</h2>
+
+<ul>
+{{for user in users:}}
+<li>{{=user.first_name}} {{=user.last_name}} (${{=user.payment_amount}}
+{{='paid' if user.paid else 'balance due'}})
+
+{{=A('[edit]',_href=URL(args=user.id))}}
+</li>
+{{pass}}
+</ul>

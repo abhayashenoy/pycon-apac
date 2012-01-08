@@ -1,0 +1,36 @@
+WSGIPythonHome <%= co %>
+<VirtualHost *:80>
+  ServerName <%= hostname %>
+  WSGIDaemonProcess web2py user=www-data group=www-data \
+                           display-name=%{GROUP}
+  WSGIProcessGroup web2py
+  WSGIScriptAlias / <%= co %>/web2py/wsgihandler.py
+
+  <Directory <%= co %>/web2py>
+    AllowOverride None
+    Order Allow,Deny
+    Deny from all
+    <Files wsgihandler.py>
+      Allow from all
+    </Files>
+  </Directory>
+
+  AliasMatch ^/([^/]+)/static/(.*) \
+           <%= co %>/web2py/applications/$1/static/$2
+  <Directory <%= co %>/web2py/applications/*/static/>
+    Order Allow,Deny
+    Allow from all
+  </Directory>
+
+  <Location /admin>
+    Order Allow,Deny
+    Allow from all
+  </Location>
+
+  <LocationMatch ^/([^/]+)/appadmin>
+  Deny from all
+  </LocationMatch>
+
+  CustomLog /var/log/pycon/access.log common
+  ErrorLog /var/log/pycon/error.log
+</VirtualHost>

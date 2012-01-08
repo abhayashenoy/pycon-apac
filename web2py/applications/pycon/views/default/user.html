@@ -1,0 +1,9 @@
+{{extend 'layout.html'}}
+<h2>{{=T( request.args(0).replace('_',' ').capitalize() )}}</h2>
+{{if request.args(0)=='register':}}
+{{=plugin_wiki.embed('register')}}
+{{pass}}
+
+{{=form}}
+
+{{include 'default/login_ajax.html'}}

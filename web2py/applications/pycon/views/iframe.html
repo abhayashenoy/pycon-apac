@@ -1,0 +1,46 @@
+<!doctype html>  
+<head>
+  <meta charset="utf-8">
+
+  <!-- Always force latest IE rendering engine (even in intranet) & Chrome Frame 
+       Remove this if you use the .htaccess -->
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+  <title>{{=response.title}}</title>
+  <meta name="description" content="Pycon Asia Pacific 2011, Singapore">
+  <meta name="author" content="Abhaya Shenoy">
+  <meta name="keywords" content="pycon, apac, singapore">
+
+  <!--  Mobile viewport optimized: j.mp/bplateviewport -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Place favicon.ico & apple-touch-icon.png in the root of your domain and delete these references -->
+  <link rel="shortcut icon" href="{{=URL(r=request, c='static', f='favicon.ico')}}">
+  <link rel="apple-touch-icon" href="{{=URL(r=request, c='static', f='apple-touch-icon.png')}}">
+
+  <!-- Uncomment if you are specifically targeting less enabled mobile browsers
+  <link rel="stylesheet" media="handheld" href="css/handheld.css?v=2">  -->
+ 
+  <!-- All JavaScript at the bottom, except for Modernizr which enables HTML5 elements & feature detects -->
+  <script src="{{=URL(r=request, c='static/js/libs', f='modernizr-1.6.min.js')}}"></script>
+  <!-- Grab Google CDN's jQuery. fall back to local if necessary -->
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="js/libs/jquery-1.4.2.js"%3E%3C/script%3E'))</script>
+
+</head>
+
+<body id="inner">
+  {{include}}
+  {{include 'web2py_ajax.html'}}
+  <link rel="stylesheet" href="{{=URL(r=request, c='static/css', f='override.css')}}">
+  
+  <!-- scripts concatenated and minified via ant build script-->
+  <script src="{{=URL(r=request, c='static/js', f='site.js')}}"></script>
+  <!-- end concatenated and minified scripts-->
+  
+  <!--[if lt IE 7 ]>
+    <script src="js/libs/dd_belatedpng.js"></script>
+    <script> DD_belatedPNG.fix('img, .png_bg'); //fix any <img> or .png_bg background-images </script>
+  <![endif]-->
+</body>
+</html>

@@ -1,0 +1,40 @@
+{{extend 'layout.html'}}
+
+<h2>Checkout</h2>
+{{=plugin_wiki.embed('checkout')}}
+
+<table>
+  {{for u in balances:}}
+    <tr>
+      <td>{{=A(u.name,_href=URL('register_other', args=u.id))}}</td>
+      <td>${{=u.conf}}</td>
+    </tr>
+    {{for t in u.tuts:}}
+      <tr>
+        <td>{{=t}}</td>
+        <td>${{=settings.tutorial_rate}}</td>
+      </tr>
+    {{pass}}
+    {{if u.disc:}}
+      <tr>
+        <td>Discount</td>
+        <td>-${{=u.disc}}</td>
+      </tr>
+    {{pass}}
+  {{pass}}
+  <tr>
+    <td>Total</td>
+    <td>${{=balance}}</td>
+  </tr>
+</table>
+
+<div id="payment">
+  {{=paypal_form}}
+  <a href="#chq" id="chq_logo" class="button" onclick="jQuery('#chq').slideToggle('fast');">Cheque</a>
+  <div class="clear"></div>
+</div>
+
+<div id="chq" class="tohide">
+  <p>Enter your cheque number, and drop off your cheque at any standard chartered bank</p>
+  {{=form}}
+</div>

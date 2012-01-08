@@ -1,0 +1,51 @@
+{{extend 'layout.html'}}
+{{def toLatex(x): return x}}
+
+<script type="text/javascript">
+var show_hide = function () {
+  var state = false;
+
+  return function () {
+    if (state == false) {
+      $(".talk-detail-summary, .talk-detail-bio").find("td").show();
+    } else {
+      $(".talk-detail-summary, .talk-detail-bio").find("td").hide();
+    }
+    state = !state;
+    return true;
+  };
+}();
+</script>
+
+<h2>Talks</h2>
+{{if papers:}}
+
+{{diff=dict(settings.difficulty)}}
+<a class="right" href="javascript:void();" onclick="show_hide();">[show/hide all details]</a>
+<table class="talk">
+{{for p in papers:}}
+  <tr>
+    <td class="title width1">{{=p.title}}</td>
+    <td>{{=p.authors}}</td>
+    <td class="width0">
+      Level: {{=diff[p.difficulty]}}<br>
+      [<a href="javascript:void();" onclick="$('.d{{=p.id}}').find('td').toggle();">details</a>]<br>
+      {{if p.file:}}
+        {{=A('[presentation]', _href=URL(a='pycon', c='default', f='download', args=[p.file,]))}}
+      {{pass}}
+    </td>
+  </tr>
+  <tr class="d{{=p.id}} talk-detail-summary">
+    <td class="tohide width0">Details</td>
+    <td class="tohide" colspan="2">{{=p.abstract}}</td>
+  </tr>
+  <tr class="d{{=p.id}} talk-detail-bio">
+    <td class="tohide width0">Presenter Bio</td>
+    <td class="tohide" colspan="2">{{=p.bio}}</td>
+  </tr>
+{{pass}}
+</table>
+
+{{else:}}
+<p>Approved talks will appear here</p>
+{{pass}}

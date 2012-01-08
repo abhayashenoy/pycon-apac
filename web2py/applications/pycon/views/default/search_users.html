@@ -1,0 +1,14 @@
+{{extend 'layout.html'}}
+
+<h2>Search</h2>
+
+<a href="#" onclick="$('#search_users').slideToggle()">toggle search form</a>
+<div id="search_users">
+{{=form}}
+</div>
+
+{{if users:}}
+<h2>Result</h2>
+{{=users}}
+{{pass}}
+

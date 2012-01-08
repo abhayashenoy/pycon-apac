@@ -1,0 +1,15 @@
+{{extend 'layout.html'}}
+
+<script><!--
+jQuery(document).ready(function(){jQuery('#map').html('<iframe src="https://www.google.com/calendar/embed?showTitle=0&amp;mode=AGENDA&amp;showNav=0&amp;height=768&amp;wkst=1&amp;bgcolor=%23FFFFFF&amp;src=2crndd7fm8lgt5remgdpv26efs%40group.calendar.google.com&amp;color=%2342104A&amp;ctz=Asia%2FSingapore&amp;dates=20110609%2F20110611" style=" border-width:0 " width="680" height="1000" frameborder="0" scrolling="no"></iframe>');});
+{{#jQuery(document).ready(function(){jQuery('#map').html('<iframe src="https://www.google.com/calendar/embed?showTitle=0&amp;mode=AGENDA&amp;showNav=0&amp;height=768&amp;wkst=1&amp;bgcolor=%23FFFFFF&amp;src=174qb293k8378fcpuc1o9rcg5nhnlanb%40import.calendar.google.com&amp;color=%2342104A&amp;ctz=Asia%2FSingapore&amp;dates=20110609%2F20110611" style=" border-width:0 " width="680" height="1000" frameborder="0" scrolling="no"></iframe>');});}}
+</script>
+
+<h2>Schedule</h2>
+
+{{=plugin_wiki.embed('agenda')}}
+
+<div id="map_container">
+  <div id="map"></div>
+</div>
+

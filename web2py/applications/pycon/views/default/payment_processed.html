@@ -1,0 +1,15 @@
+{{extend 'layout.html'}}
+
+<h2>Thank you!</h2>
+
+<p>Thank you for your payment.
+
+{{if request.args(0) == 'chq':}}
+We've sent you an email about depositing the cheque.
+{{else:}}
+You'll receive an email from paypal for your payment.
+{{pass}}
+
+See you at the conference!</p>
+
+

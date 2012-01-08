@@ -1,0 +1,44 @@
+{{extend 'layout.html'}}
+{{def short(x): return x if len(x)<=50 else x[:50]+'...'}}
+
+{{if papers_all:}}
+<h3>All Talks</h3>
+<table>
+{{for p in papers_all:}}
+  <tr>
+    <td><a href="{{=URL(r=request,f='manage_talk',args=p.id)}}">{{=short(p.title)}}</a></td>
+    <td>{{=p.created_by.first_name}} {{=p.created_by.last_name}}</td>
+    <td>{{=p.status}}</td>
+  </tr>
+{{pass}}
+</table>
+{{pass}}
+
+{{if papers_to_review:}}
+<h3>Talks to review</h3>
+<table>
+{{for p in papers_to_review:}}
+  <tr>
+    <td><a href="{{=URL(r=request,f='manage_talk',args=p.id)}}">{{=short(p.title)}}</a></td>
+    <td>{{=p.created_by.first_name}} {{=p.created_by.last_name}}</td>
+    <td>{{=p.status}}</td>
+  </tr>
+{{pass}}
+</table>
+{{pass}}
+
+{{if papers_mine:}}
+<h3>My Talks</h3>
+<table>
+{{for p in papers_mine:}}
+  <tr>
+    <td><a href="{{=URL(r=request,f='manage_talk',args=p.id)}}">{{=short(p.title)}}</a></td>
+    <td>{{=p.created_by.first_name}} {{=p.created_by.last_name}}</td>
+    <td>{{=p.status}}</td>
+  </tr>
+{{pass}}
+</table>
+{{pass}}
+
+<h3>Submit a talk</h3>
+{{=form}}

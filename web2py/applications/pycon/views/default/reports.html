@@ -1,0 +1,75 @@
+{{extend 'layout.html'}}
+
+{{def csv_url(vars={}): return URL(request.application, c='d', f='users_filtered.csv', vars=vars)}}
+<h2>Reports</h2>
+
+<table class="no-deco">
+  <tr>
+    <td></td>
+    <td>Paid</td>
+    <td>Not paid</td>
+  </tr>
+  <tr>
+    <td>Total registrations</td>
+    <td><a href="{{=csv_url(dict(paid=True))}}">{{=totals['all'][0]}}</a></td>
+    <td><a href="{{=csv_url(dict(paid=False))}}">{{=totals['all'][1]}}</a></td>
+  </tr>
+  <tr>
+    <td>Ordinary attendees</td>
+    <td><a href="{{=csv_url(dict(paid=True,type='ordinary'))}}">{{=totals['ordinary'][0]}}</a></td>
+    <td><a href="{{=csv_url(dict(paid=False,type='ordinary'))}}">{{=totals['ordinary'][1]}}</a></td>
+  </tr>
+  <tr>
+    <td>Guest attendees</td>
+    <td><a href="{{=csv_url(dict(paid=True,type='guest'))}}">{{=totals['guest'][0]}}</a></td>
+    <td><a href="{{=csv_url(dict(paid=False,type='guest'))}}">{{=totals['guest'][1]}}</a></td>
+  </tr>
+  <tr>
+    <td>Speakers</td>
+    <td><a href="{{=csv_url(dict(paid=True,type='speaker'))}}">{{=totals['speaker'][0]}}</a></td>
+    <td><a href="{{=csv_url(dict(paid=False,type='speaker'))}}">{{=totals['speaker'][1]}}</a></td>
+  </tr>
+  <tr>
+    <td colspan="3"><b>Tutorial registrations</b></td>
+  </tr>
+  {{for key, val in tutorial_counts.iteritems():}}
+    <tr>
+      <td>{{=key}}</td>
+      <td><a href="{{=csv_url(dict(paid=True, tutorial=val[2]))}}">{{=val[0]}}</a></td>
+      <td><a href="{{=csv_url(dict(paid=False, tutorial=val[2]))}}">{{=val[1]}}</a></td>
+    </tr>
+  {{pass}}
+  <tr>
+    <td colspan="3"><b>Food type</b></td>
+  </tr>
+  {{for key, val in food.iteritems():}}
+    <tr>
+      <td>{{=key}}</td>
+      <td>{{=val[0]}}</td>
+      <td>{{=val[1]}}</td>
+    </tr>
+  {{pass}}
+  <tr>
+    <td colspan="3"><b>Tshirt size</b></td>
+  </tr>
+  {{for key, val in tshirts.iteritems():}}
+    <tr>
+      <td>{{=key}}</td>
+      <td>{{=val[0]}}</td>
+      <td>{{=val[1]}}</td>
+    </tr>
+  {{pass}}
+  <tr>
+    <td colspan="3"><b>Demographics</b></td>
+  </tr>
+  <tr>
+    <td>Singaporeans</td>
+    <td><a href="{{=csv_url(dict(paid=True, who='sg'))}}">{{=sg[0]}}</a></td>
+    <td><a href="{{=csv_url(dict(paid=False, who='sg'))}}">{{=sg[1]}}</a></td>
+  </tr>
+  <tr>
+    <td>Others</td>
+    <td><a href="{{=csv_url(dict(paid=True, who='others'))}}">{{=others[0]}}</a></td>
+    <td><a href="{{=csv_url(dict(paid=False, who='others'))}}">{{=others[1]}}</a></td>
+  </tr>
+</table>
