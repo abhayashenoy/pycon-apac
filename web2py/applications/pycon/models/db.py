@@ -237,12 +237,12 @@ def _setup_group_membership(form):
 auth.settings.register_onaccept = _setup_group_membership
 
 auth.settings.login_captcha = False
-#auth.settings.captcha = Recaptcha(request,
-#    '6LfPzMASAAAAAPx0VBi4NkfbUko1r2SbsA1285x7',
-#    '6LfPzMASAAAAALA1S9vApCUEMcEDCq5QG_HNVYkj',
-#    label='Are you human ?',
-#    error_message='Your text didn\'t match. Try again')
-auth.settings.captcha = False
+auth.settings.captcha = Recaptcha(request,
+    '6LfPzMASAAAAAPx0VBi4NkfbUko1r2SbsA1285x7',
+    '6LfPzMASAAAAALA1S9vApCUEMcEDCq5QG_HNVYkj',
+    label='Are you human ?',
+    error_message='Your text didn\'t match. Try again')
+#auth.settings.captcha = False
 
 if settings.rpx_domain:
     from gluon.contrib.login_methods.rpx_account import RPXAccount
