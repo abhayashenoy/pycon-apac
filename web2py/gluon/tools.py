@@ -589,7 +589,7 @@ class Recaptcha(DIV):
 
     API_SSL_SERVER = 'http://www.google.com/recaptcha/api'
     API_SERVER = 'http://www.google.com/recaptcha/api'
-    VERIFY_SERVER = 'http://www.google.com/recaptcha/api'
+    VERIFY_SERVER = 'www.google.com/recaptcha/api'
 
     def __init__(
         self,
