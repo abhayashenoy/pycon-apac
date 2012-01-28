@@ -237,7 +237,7 @@ def _setup_group_membership(form):
 auth.settings.register_onaccept = _setup_group_membership
 
 auth.settings.login_captcha = False
-auth.settings.captcha = Recaptcha(request,
+auth.settings.register_captcha = Recaptcha(request,
     '6LfPzMASAAAAAPx0VBi4NkfbUko1r2SbsA1285x7',
     '6LfPzMASAAAAALA1S9vApCUEMcEDCq5QG_HNVYkj',
     label='Are you human ?',
