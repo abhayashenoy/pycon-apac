@@ -242,7 +242,7 @@ auth.settings.register_captcha = Recaptcha(request,
     '6LfPzMASAAAAALA1S9vApCUEMcEDCq5QG_HNVYkj',
     label='Are you human ?',
     error_message='Your text didn\'t match. Try again')
-#auth.settings.captcha = False
+auth.settings.captcha = False
 
 if settings.rpx_domain:
     from gluon.contrib.login_methods.rpx_account import RPXAccount
