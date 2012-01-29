@@ -1,5 +1,5 @@
 response.title='Pycon Asia Pacific'
-response.subtitle=SPAN('Singapore, 7 - 9 Jun 2012')
+response.subtitle=SPAN('Singapore, 9 - 11 Jun 2012')
 from gluon.storage import Storage
 from datetime import datetime
 import os, sys
@@ -32,7 +32,7 @@ settings.googlemap_key={
 }
 settings.calendar_url="http://www.google.com/calendar/embed?src=<calendar>"
 
-settings.sections=('2012','2011','2010','2009','2008','2007')
+settings.sections=('2012','2010','2009','2008','2007')
 settings.bibtex="""@InProceedings{hevw%(id)s,
      author    = {%(authors)s}
      title     = {%(title)s}

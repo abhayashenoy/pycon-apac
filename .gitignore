@@ -23,4 +23,3 @@ web2py/applications/pycon/databases/
 web2py/applications/pycon/models/0.py.secret
 web2py/applications/pycon/cache/
 web2py/applications/pycon/sessions/
-*.log
