@@ -587,9 +587,9 @@ class Mail(object):
 
 class Recaptcha(DIV):
 
-    API_SSL_SERVER = 'https://api-secure.recaptcha.net'
-    API_SERVER = 'http://api.recaptcha.net'
-    VERIFY_SERVER = 'api-verify.recaptcha.net'
+    API_SSL_SERVER = 'https://www.google.com/recaptcha/api'
+    API_SERVER = 'http://www.google.com/recaptcha/api'
+    VERIFY_SERVER = 'www.google.com/recaptcha/api'
 
     def __init__(
         self,
