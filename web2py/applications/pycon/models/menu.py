@@ -16,7 +16,7 @@ response.menu = [
     [T('Conference'),   _b.conference or False,     URL(request.application,'plugin_wiki','page/conference'), []],
     [T('Tutorials'),    _b.tutorials or False,      URL(request.application,'plugin_wiki','page/tutorials'),  []],
     [T('Tournament'),   _b.tournament or False,     URL(request.application,'plugin_wiki','page/tournament'), []],
-    [T('Talks'),        _b.talks or False,          URL(request.application,'default','list_talks'),          []],
+    [T('Talks'),        _b.talks or False,          URL(request.application,'plugin_wiki','page/talks'),          []],
     [T('Schedule'),     _b.schedule or False,       URL(request.application,'default','schedule'),            []],
     [T('Venue'),        _b.venue or False,          URL(request.application,'default','venue'),      []],
     [T('FAQ'),          _b.faq or False,            URL(request.application,'plugin_wiki','page/faq'),        []],
