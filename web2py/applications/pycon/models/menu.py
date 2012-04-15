@@ -19,7 +19,6 @@ response.menu = [
     [T('Talks'),        _b.talks or False,          URL(request.application,'default','list_talks'),          []],
     [T('Schedule'),     _b.schedule or False,       URL(request.application,'default','schedule'),            []],
     [T('Venue'),        _b.venue or False,          URL(request.application,'default','venue'),      []],
-    [T('Participants'), _b.participants or False,   URL(request.application,'default','participants'),        []],
     [T('FAQ'),          _b.faq or False,            URL(request.application,'plugin_wiki','page/faq'),        []],
    ]
 
